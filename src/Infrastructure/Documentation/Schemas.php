@@ -230,20 +230,9 @@ use OpenApi\Attributes as OA;
         ),
         new OA\Property(
             property: 'rating',
-            type: 'object',
-            properties: [
-                new OA\Property(
-                    property: 'rate',
-                    type: 'number',
-                    format: 'float',
-                    example: 3.9
-                ),
-                new OA\Property(
-                    property: 'count',
-                    type: 'integer',
-                    example: 120
-                )
-            ]
+            type: 'number',
+            format: 'float',
+            example: 3.9
         )
     ]
 )]
