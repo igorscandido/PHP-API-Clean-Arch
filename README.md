@@ -177,22 +177,16 @@ Importe a collection localizada em `docs/postman_collection.json` no Postman par
 
 ## Testes
 
-A aplicação possui uma suíte completa de testes de integração implementada com PHPUnit, seguindo as melhores práticas do PHP moderno.
+A aplicação possui testes de integração implementados com PHPUnit para os endpoints de auth e favorites na pasta `tests`:
 
 ### Executando os Testes
 
 ```bash
-# Executar todos os testes
-composer test
+# Via Composer
+composer run test
 
-# Executar testes com relatório de cobertura
-composer test-coverage
-
-# Executar apenas testes de integração
-vendor/bin/phpunit --testsuite=Integration
-
-# Executar teste específico
-vendor/bin/phpunit tests/Integration/AuthControllerTest.php
+# Via Docker
+docker-compose exec app composer run test
 ```
 
 ### Cobertura
@@ -200,8 +194,7 @@ vendor/bin/phpunit tests/Integration/AuthControllerTest.php
 Os testes cobrem:
 - **AuthController**: Login, refresh token, logout, verificação de token
 - **FavoriteController**: Listagem, adição e remoção de favoritos
-- **Validações**: Dados de entrada, autorização, casos de erro
-- **Cenários**: Sucesso, erro, casos de borda
+- **Validações**: Dados de entrada, casos de erro
 
 ## Análise Estática (PHPStan)
 A aplicação tem um linter de análise estática que utilizei durante o desenvolvimento, se quiser validar é só rodar:
