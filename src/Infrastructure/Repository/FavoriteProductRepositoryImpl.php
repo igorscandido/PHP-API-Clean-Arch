@@ -95,7 +95,7 @@ class FavoriteProductRepositoryImpl implements FavoriteProductRepository
             productId: $data['product_id'],
             productTitle: $data['product_title'],
             productImage: $data['product_image'],
-            productPrice: $data['product_price'] ? (float) $data['product_price'] : null,
+            productPrice: (float) $data['product_price'],
             productRating: $data['product_rating'] ? (float) $data['product_rating'] : null,
             id: $data['id'],
             createdAt: new DateTime($data['created_at'])

@@ -50,13 +50,13 @@ class FavoriteService
             throw new \InvalidArgumentException('Product not found in external API');
         }
 
-        $favorite = FavoriteProduct::create(
-            $addFavoriteDto->clientId,
-            $addFavoriteDto->productId,
-            $productData['title'],
-            $productData['image'],
-            $productData['price'],
-            $productData['rating']
+        $favorite = new FavoriteProduct(
+            clientId: $addFavoriteDto->clientId,
+            productId: $addFavoriteDto->productId,
+            productTitle: $productData['title'],
+            productImage: $productData['image'],
+            productPrice: $productData['price'],
+            productRating: $productData['rating']
         );
 
         return $this->favoriteRepository->save($favorite);
