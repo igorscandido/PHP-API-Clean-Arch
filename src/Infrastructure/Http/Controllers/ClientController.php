@@ -46,7 +46,7 @@ class ClientController
             $clients = $this->clientService->getAllClients();
 
             $responseData = array_map(function (Client $client) {
-                return ClientDto::fromArray($client->toArray())->withoutPassword();
+                return ClientDto::fromArray($client->toArray());
             }, $clients);
 
             $response->getBody()->write(json_encode([
@@ -107,7 +107,7 @@ class ClientController
                 return $this->errorResponse($response, 'Client not found', 404);
             }
 
-            $responseData = ClientDto::fromArray($client->toArray())->withoutPassword();
+            $responseData = ClientDto::fromArray($client->toArray());
 
             $response->getBody()->write(json_encode([
                 'data' => $responseData,
@@ -161,7 +161,7 @@ class ClientController
 
             $client = $this->clientService->createClient($createClientDto);
 
-            $responseData = ClientDto::fromArray($client->toArray())->withoutPassword();
+            $responseData = ClientDto::fromArray($client->toArray());
             
             $response->getBody()->write(json_encode([
                 'data' => $responseData,
@@ -247,7 +247,7 @@ class ClientController
                 return $this->errorResponse($response, 'Client not found', 404);
             }
 
-            $responseData = ClientDto::fromArray($client->toArray())->withoutPassword();
+            $responseData = ClientDto::fromArray($client->toArray());
             
             $response->getBody()->write(json_encode([
                 'data' => $responseData,
@@ -322,7 +322,7 @@ class ClientController
 
             $this->clientService->deleteClient($id);
 
-            $responseData = ClientDto::fromArray($client->toArray())->withoutPassword();
+            $responseData = ClientDto::fromArray($client->toArray());
 
             $response->getBody()->write(json_encode([
                 'data' => $responseData,

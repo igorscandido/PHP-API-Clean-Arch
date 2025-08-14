@@ -113,12 +113,7 @@ class AuthController
     public function refresh(Request $request, Response $response): Response
     {
         try {
-            $authHeader = $request->getHeaderLine('Authorization');
-            if (!str_starts_with($authHeader, 'Bearer ')) {
-                return $this->errorResponse($response, 'Bearer token required', 400);
-            }
-            
-            $token = substr($authHeader, 7);
+            $token = $request->getAttribute('token');
 
             $newToken = $this->authService->refreshToken($token);
             if (!$newToken) {
@@ -212,6 +207,9 @@ class AuthController
     public function verify(Request $request, Response $response): Response
     {
         $authData = $request->getAttribute('auth_data');
+        if (!$authData) {
+            return $this->errorResponse($response, 'Invalid or expired token', 401);
+        }
         
         $response->getBody()->write(json_encode([
             'data' => [
