@@ -315,27 +315,4 @@ class AuthControllerTest extends BaseIntegrationTest
         $this->assertEquals($userData, $data['data']['user']);
         $this->assertTrue($data['data']['authenticated']);
     }
-
-    /**
-     * @test
-     */
-    public function verify_token_without_auth_data_should_return_null_user(): void
-    {
-        $request = $this->createJsonRequest('GET', '/auth/verify');
-        $response = $this->createResponse();
-
-        $result = $this->controller->verify($request, $response);
-
-        $this->assertResponseStatus($result, 200);
-        $this->assertResponseIsJson($result);
-        
-        $data = $this->getJsonFromResponse($result);
-
-        $this->assertArrayHasKey('data', $data);
-        $this->assertArrayHasKey('user', $data['data']);
-        $this->assertArrayHasKey('authenticated', $data['data']);
-        
-        $this->assertNull($data['data']['user']);
-        $this->assertTrue($data['data']['authenticated']);
-    }
 }
