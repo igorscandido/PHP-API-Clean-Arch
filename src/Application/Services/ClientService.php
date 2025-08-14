@@ -32,10 +32,10 @@ class ClientService
             throw new \InvalidArgumentException('Email already exists');
         }
 
-        $client = Client::create(
-            $createClientDto->name,
-            $createClientDto->email,
-            $createClientDto->password
+        $client = new Client(
+            name: $createClientDto->name,
+            email: $createClientDto->email,
+            password: $createClientDto->password
         );
         
         return $this->clientRepository->save($client);

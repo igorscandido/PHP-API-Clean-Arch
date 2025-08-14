@@ -135,10 +135,17 @@ class ClientRepositoryImpl implements ClientRepository
 
     private function mapToEntity(array $data): Client
     {
+        if (!$data['password']) {
+            return Client::withoutPassword(
+                name: $data['name'],
+                email: $data['email']
+            );
+        }
+
         return new Client(
             name: $data['name'],
             email: $data['email'],
-            password: $data['password'] ?? null,
+            password: $data['password'],
             id: $data['id'],
             createdAt: new DateTime($data['created_at']),
             updatedAt: new DateTime($data['updated_at'])

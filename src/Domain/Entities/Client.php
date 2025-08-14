@@ -16,17 +16,14 @@ class Client
     public function __construct(
         string $name,
         string $email,
-        ?string $password = null,
+        string $password,
         ?int $id = null,
         ?DateTime $createdAt = null,
         ?DateTime $updatedAt = null
     ) {
         $this->validateName($name);
         $this->validateEmail($email);
-
-        if ($password) {
-            $this->validatePassword($password);
-        }
+        $this->validatePassword($password);
 
         $this->id = $id;
         $this->name = $name;
@@ -36,9 +33,15 @@ class Client
         $this->updatedAt = $updatedAt ?? new DateTime();
     }
 
-    public static function create(string $name, string $email, string $password): self
+    public static function withoutPassword(string $name, string $email): self
     {
-        return new self($name, $email, $password);
+        $reflection = new \ReflectionClass(self::class);
+        $client = $reflection->newInstanceWithoutConstructor();
+
+        $client->name = $name;
+        $client->email = $email;
+
+        return $client;
     }
 
     public static function fromArray(array $data): self
@@ -99,10 +102,6 @@ class Client
 
     public function updatePassword(string $password): void
     {
-        if (!$password) {
-            throw new \InvalidArgumentException('Password cannot be empty');
-        }
-
         $this->validatePassword($password);
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->updatedAt = new DateTime();
@@ -115,17 +114,6 @@ class Client
         }
 
         return password_verify($password, $this->password);
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s')
-        ];
     }
 
     private function validateName(string $name): void
@@ -155,5 +143,16 @@ class Client
         if (strlen($password) < 6) {
             throw new \InvalidArgumentException('Password must be at least 6 characters long');
         }
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s')
+        ];
     }
 }
