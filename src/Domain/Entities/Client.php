@@ -151,8 +151,8 @@ class Client
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s')
+            'created_at' => $this->createdAt->format('d/m/Y H:i:s'),
+            'updated_at' => $this->updatedAt->format('d/m/Y H:i:s')
         ];
     }
 }
