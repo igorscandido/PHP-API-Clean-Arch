@@ -28,18 +28,21 @@ class Client
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->createdAt = $createdAt ?? new DateTime();
         $this->updatedAt = $updatedAt ?? new DateTime();
     }
 
-    public static function withoutPassword(string $name, string $email): self
+    public static function withoutPassword(int $id, string $name, string $email, DateTime $createdAt, DateTime $updatedAt): self
     {
         $reflection = new \ReflectionClass(self::class);
         $client = $reflection->newInstanceWithoutConstructor();
 
+        $client->id = $id;
         $client->name = $name;
         $client->email = $email;
+        $client->createdAt = $createdAt;
+        $client->updatedAt = $updatedAt;
 
         return $client;
     }

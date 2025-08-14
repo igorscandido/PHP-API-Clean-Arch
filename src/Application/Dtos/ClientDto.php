@@ -35,11 +35,4 @@ class ClientDto
             'updated_at' => $this->updatedAt
         ];
     }
-
-    public function withoutPassword(): array
-    {
-        $data = $this->toArray();
-        unset($data['password']);
-        return $data;
-    }
 }
