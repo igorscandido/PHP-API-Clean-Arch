@@ -71,7 +71,7 @@ $app->add(function ($request, $handler) {
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 });
 
-// Authentication routes (no auth required)
+// Authentication routes
 $app->group('/api/v1/auth', function ($group) use ($container) {
     $group->post('/login', [\App\Infrastructure\Http\Controllers\AuthController::class, 'login']);
 

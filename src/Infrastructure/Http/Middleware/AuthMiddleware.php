@@ -30,7 +30,10 @@ class AuthMiddleware
             return $this->unauthorizedResponse('Invalid or expired token');
         }
         
-        $request = $request->withAttribute('auth_data', $userData);
+        $request = $request
+            ->withAttribute('auth_data', $userData)
+            ->withAttribute('token', $token);
+        
         return $handler->handle($request);
     }
 

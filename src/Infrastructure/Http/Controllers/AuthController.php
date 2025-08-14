@@ -34,6 +34,11 @@ class AuthController
                 content: new OA\JsonContent(ref: '#/components/schemas/LoginResponse')
             ),
             new OA\Response(
+                response: 400,
+                description: 'Validation failed',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
                 response: 401,
                 description: 'Invalid credentials',
                 content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
@@ -73,6 +78,8 @@ class AuthController
             ]));
             
             return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+        } catch (\InvalidArgumentException $e) {
+            return $this->errorResponse($response, $e->getMessage(), 400);
         } catch (\Exception $e) {
             return $this->errorResponse($response, 'Login failed', 500);
         }
@@ -164,17 +171,9 @@ class AuthController
     )]
     public function logout(Request $request, Response $response): Response
     {
-        try {
-            $authHeader = $request->getHeaderLine('Authorization');
-            if (!str_starts_with($authHeader, 'Bearer ')) {
-                return $this->errorResponse($response, 'Invalid authorization header', 401);
-            }
-            
-            $token = substr($authHeader, 7);
-            if (empty($token)) {
-                return $this->errorResponse($response, 'Token is required', 401);
-            }
-            
+        try {            
+            $token = $request->getAttribute('token');
+
             $logoutSuccess = $this->authService->logout($token);
             if (!$logoutSuccess) {
                 return $this->errorResponse($response, 'Failed to logout. Token may be invalid or already revoked.', 400);

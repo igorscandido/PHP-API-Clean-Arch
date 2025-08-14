@@ -175,6 +175,34 @@ curl -X POST http://localhost:8080/api/v1/clients/1/favorites \
 
 Importe a collection localizada em `docs/postman_collection.json` no Postman para importar todos os endpoints no Postman.
 
+## Testes
+
+A aplicação possui uma suíte completa de testes de integração implementada com PHPUnit, seguindo as melhores práticas do PHP moderno.
+
+### Executando os Testes
+
+```bash
+# Executar todos os testes
+composer test
+
+# Executar testes com relatório de cobertura
+composer test-coverage
+
+# Executar apenas testes de integração
+vendor/bin/phpunit --testsuite=Integration
+
+# Executar teste específico
+vendor/bin/phpunit tests/Integration/AuthControllerTest.php
+```
+
+### Cobertura
+
+Os testes cobrem:
+- **AuthController**: Login, refresh token, logout, verificação de token
+- **FavoriteController**: Listagem, adição e remoção de favoritos
+- **Validações**: Dados de entrada, autorização, casos de erro
+- **Cenários**: Sucesso, erro, casos de borda
+
 ## Análise Estática (PHPStan)
 A aplicação tem um linter de análise estática que utilizei durante o desenvolvimento, se quiser validar é só rodar:
 ```bash
