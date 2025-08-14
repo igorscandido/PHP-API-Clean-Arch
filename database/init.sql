@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS favorite_products (
     client_id INTEGER NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
     product_id INTEGER NOT NULL,
     product_title VARCHAR(500) NOT NULL,
-    product_image VARCHAR(1000),
-    product_price DECIMAL(10,2),
+    product_image VARCHAR(1000) NOT NULL,
+    product_price DECIMAL(10,2) NOT NULL,
     product_rating DECIMAL(3,2),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(client_id, product_id)
