@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         failOnRisky="true"
+         failOnWarning="true"
+         displayDetailsOnIncompleteTests="true"
+         displayDetailsOnSkippedTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerErrors="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         executionOrder="depends,defects">
+    <testsuites>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">tests/Integration</directory>
+            <exclude>tests/Integration/BaseIntegrationTest.php</exclude>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>src/Infrastructure/Documentation</directory>
+            <file>src/index.php</file>
+        </exclude>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="DB_HOST" value="test"/>
+        <env name="DB_PORT" value="5432"/>
+        <env name="DB_NAME" value="aiqfome"/>
+        <env name="DB_USER" value="test"/>
+        <env name="DB_PASSWORD" value="test"/>
+        <env name="JWT_SECRET" value="SECR3TK3Y"/>
+        <env name="REDIS_HOST" value="test"/>
+        <env name="REDIS_PORT" value="6379"/>
+        <env name="REDIS_PASSWORD" value="test"/>
+        <env name="API_BASE_URL" value="http://localhost:8080"/>
+    </php>
+</phpunit>
