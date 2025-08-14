@@ -1,0 +1,15 @@
+parameters:
+    level: 6
+    paths:
+        - src
+    excludePaths:
+        - vendor
+        - tests
+    ignoreErrors:
+        # Ignore specific vendor issues
+        - '#apcu_fetch.*$#'
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
+    reportUnmatchedIgnoredErrors: false
