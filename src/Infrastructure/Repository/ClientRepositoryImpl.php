@@ -55,9 +55,7 @@ class ClientRepositoryImpl implements ClientRepository
     }
 
     public function save(Client $client): Client
-    {
-        $hashedPassword = password_hash($client->getPassword(), PASSWORD_DEFAULT);
-        
+    {        
         $stmt = $this->db->prepare("
             INSERT INTO clients (name, email, password) 
             VALUES (?, ?, ?) 
@@ -66,7 +64,7 @@ class ClientRepositoryImpl implements ClientRepository
         $stmt->execute([
             $client->getName(),
             $client->getEmail(),
-            $hashedPassword
+            $client->getPassword()
         ]);
 
         $result = $stmt->fetch();
@@ -135,10 +133,13 @@ class ClientRepositoryImpl implements ClientRepository
 
     private function mapToEntity(array $data): Client
     {
-        if (!$data['password']) {
+        if (!isset($data['password'])) {
             return Client::withoutPassword(
+                id: $data['id'],
                 name: $data['name'],
-                email: $data['email']
+                email: $data['email'],
+                createdAt: isset($data['created_at']) ? new DateTime($data['created_at']) : new DateTime(),
+                updatedAt: isset($data['updated_at']) ? new DateTime($data['updated_at']) : new DateTime()
             );
         }
 

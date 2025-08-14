@@ -51,7 +51,7 @@ class CachedFavoriteProductRepository implements FavoriteProductRepository
         
         $this->cache->set(
             $cacheKey, 
-            $favorite ? $favorite->toArray() : null, 
+            $favorite ? $favorite->toArray() : false, 
             $this->cacheTtl
         );
         
