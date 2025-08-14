@@ -14,7 +14,7 @@ class RedisRepositoryImpl implements CacheRepository
     {
         $this->redis = $redis;
 
-        $this->defaultTtl = (int) ($_ENV['CACHE_DEFAULT_TTL'] ?? 3600);
+        $this->defaultTtl = (int) $_ENV['CACHE_DEFAULT_TTL'];
     }
 
     public function set(string $key, mixed $value, ?int $ttl = null): bool

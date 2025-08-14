@@ -18,7 +18,7 @@ class CachedFavoriteProductRepository implements FavoriteProductRepository
     ) {
         $this->repository = $repository;
         $this->cache = $cache;
-        $this->cacheTtl = (int) ($_ENV['FAVORITES_CACHE_TTL'] ?? 1800);
+        $this->cacheTtl = (int) $_ENV['FAVORITES_CACHE_TTL'];
     }
 
     public function findByClientId(int $clientId): array
@@ -48,10 +48,10 @@ class CachedFavoriteProductRepository implements FavoriteProductRepository
         }
         
         $favorite = $this->repository->findByClientAndProduct($clientId, $productId);
-    
+        
         $this->cache->set(
             $cacheKey, 
-            $favorite ? $favorite->toArray() : false, 
+            $favorite ? $favorite->toArray() : null, 
             $this->cacheTtl
         );
         
@@ -87,16 +87,8 @@ class CachedFavoriteProductRepository implements FavoriteProductRepository
         }
 
         $exists = $this->repository->exists($clientId, $productId);
-        $this->cache->set($cacheKey, $exists, min($this->cacheTtl, 300));
+        $this->cache->set($cacheKey, $exists, $this->cacheTtl);
         return $exists;
-    }
-
-    private function invalidateCacheForClient(int $clientId): void
-    {
-        $this->cache->delete($this->getCacheKey('client', $clientId));
-        
-        $this->cache->deleteByPattern("favorites:client_product:{$clientId}:*");
-        $this->cache->deleteByPattern("favorites:exists:{$clientId}:*");
     }
 
     private function getCacheKey(string $type, int $clientId, ?int $productId = null): string
@@ -108,6 +100,14 @@ class CachedFavoriteProductRepository implements FavoriteProductRepository
         }
         
         return $key;
+    }
+
+    private function invalidateCacheForClient(int $clientId): void
+    {
+        $this->cache->delete($this->getCacheKey('client', $clientId));
+        
+        $this->cache->deleteByPattern("favorites:client_product:{$clientId}:*");
+        $this->cache->deleteByPattern("favorites:exists:{$clientId}:*");
     }
 
     private function serializeFavorites(array $favorites): array
