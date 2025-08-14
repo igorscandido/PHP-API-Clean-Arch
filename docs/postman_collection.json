@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "f457bf15-f65b-43c8-a3ae-a3ce0ba739fd",
+		"name": "Aiqfome Challenge API",
+		"description": "Collection for testing the Aiqfome Challenge API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45681971",
+		"_collection_link": "https://igorcandido-7477252.postman.co/workspace/Igor-Candido's-Workspace~4124a548-6171-452f-82af-da6132cd3fb5/collection/45681971-f457bf15-f65b-43c8-a3ae-a3ce0ba739fd?action=share&source=collection_link&creator=45681971"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login with Email/Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"igor.candido@aiqfome.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUwNDU5NjUsImV4cCI6MTc1NTEzMjM2NSwianRpIjoiZjEyZWY4YmJhYWM3ODMzMGIxNmQ3ZmRjNDY5OTRlYTIiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIGRlIFNvdXphIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.ZdSLCX2wbC97Ni2lPWpvxobpnDcddbi5MOaXmhYHSG0"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "List Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Igor Candido\",\n  \"email\": \"igor.candido@aiqfome.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Client",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUwNTI5MDIsImV4cCI6MTc1NTEzOTMwMiwianRpIjoiODYwN2M4NTE3MGEyZjM5MjJiY2FjMzhmODBlMjI0YzQiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.29bYdDb5fyFjtr0mwOeqDkYlEW-gND9eA3-VjTDZh0k"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Igor de Souza Candido\",\n  \"email\": \"igor.candido@aiqfome.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Client",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "List Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "List Client Favorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1/favorites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product to Favorites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_id\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1/favorites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Product from Favorites",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJpYXQiOjE3NTUxMDMyMTYsImV4cCI6MTc1NTE4OTYxNiwianRpIjoiMzIxOWU5Njg0ZGFjZTJkZTM4ODc1M2JiYTdlYWIzODAiLCJzdWIiOjEsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJJZ29yIENhbmRpZG8iLCJlbWFpbCI6Imlnb3IuY2FuZGlkb0BhaXFmb21lLmNvbSJ9fQ.m87L6lTohw5Pa6D2lyH2TDD6zfQNV8RAQxdf4q4CEX4"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/clients/1/favorites/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"clients",
+								"1",
+								"favorites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1"
+		},
+		{
+			"key": "jwt_token",
+			"value": ""
+		},
+		{
+			"key": "login_email",
+			"value": "john.doe@example.com"
+		},
+		{
+			"key": "login_password",
+			"value": "password123"
+		}
+	]
+}
