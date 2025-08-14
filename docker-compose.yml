@@ -6,7 +6,8 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/var/www/html/
+      - .:/var/www/html
+      - /var/www/html/vendor
     depends_on:
       - database
       - redis
