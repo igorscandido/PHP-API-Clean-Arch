@@ -39,6 +39,11 @@ class ProductController
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
                 response: 500,
                 description: 'Failed to fetch products',
                 content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
@@ -87,6 +92,11 @@ class ProductController
                         new OA\Property(property: 'total', type: 'integer', example: 1)
                     ]
                 )
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
             ),
             new OA\Response(
                 response: 404,

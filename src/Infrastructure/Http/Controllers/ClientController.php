@@ -210,8 +210,23 @@ class ClientController
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
                 response: 400,
                 description: 'Validation error',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden - Can only update own account',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 409,
+                description: 'Conflict - Email already exists',
                 content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
             ),
             new OA\Response(
@@ -288,6 +303,11 @@ class ClientController
                         new OA\Property(property: 'total', type: 'integer', example: 1)
                     ]
                 )
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
             ),
             new OA\Response(
                 response: 403,

@@ -52,6 +52,16 @@ class FavoriteController
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden - Can only access own favorites',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
                 response: 404,
                 description: 'Client not found',
                 content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
@@ -123,8 +133,23 @@ class FavoriteController
                 )
             ),
             new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden - Can only add to own favorites',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
                 response: 400,
                 description: 'Validation error or product already in favorites',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 409,
+                description: 'Conflict - Product already in favorites',
                 content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
             ),
             new OA\Response(
@@ -199,6 +224,16 @@ class FavoriteController
                 response: 200,
                 description: 'Product removed from favorites successfully',
                 content: new OA\JsonContent(ref: '#/components/schemas/SuccessResponse')
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Unauthorized - Bearer token required or invalid',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
+            ),
+            new OA\Response(
+                response: 403,
+                description: 'Forbidden - Can only remove from own favorites',
+                content: new OA\JsonContent(ref: '#/components/schemas/ErrorResponse')
             ),
             new OA\Response(
                 response: 404,

@@ -16,25 +16,23 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'name',
             type: 'string',
-            example: 'João Silva'
+            example: 'Igor Candido'
         ),
         new OA\Property(
             property: 'email',
             type: 'string',
             format: 'email',
-            example: 'joao.silva@example.com'
+            example: 'igor.candido@aiqfome.com'
         ),
         new OA\Property(
             property: 'created_at',
             type: 'string',
-            format: 'date-time',
-            example: '2023-01-01T00:00:00Z'
+            example: '01/01/2023 00:00:00'
         ),
         new OA\Property(
             property: 'updated_at',
             type: 'string',
-            format: 'date-time',
-            example: '2023-01-01T00:00:00Z'
+            example: '01/01/2023 00:00:00'
         )
     ]
 )]
@@ -46,13 +44,13 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'name',
             type: 'string',
-            example: 'João Silva'
+            example: 'Igor Candido'
         ),
         new OA\Property(
             property: 'email',
             type: 'string',
             format: 'email',
-            example: 'joao.silva@example.com'
+            example: 'igor.candido@aiqfome.com'
         ),
         new OA\Property(
             property: 'password',
@@ -69,13 +67,13 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'name',
             type: 'string',
-            example: 'João Silva Updated'
+            example: 'Igor Candido Updated'
         ),
         new OA\Property(
             property: 'email',
             type: 'string',
             format: 'email',
-            example: 'joao.silva.updated@example.com'
+            example: 'igor.candido.updated@aiqfome.com'
         ),
         new OA\Property(
             property: 'password',
@@ -187,7 +185,7 @@ use OpenApi\Attributes as OA;
             property: 'data',
             type: 'object',
             properties: [
-                new OA\Property(property: 'user', ref: '#/components/schemas/Client'),
+                new OA\Property(property: 'user', ref: '#/components/schemas/AuthenticatedUser'),
                 new OA\Property(property: 'authenticated', type: 'boolean', example: true)
             ]
         )
@@ -283,8 +281,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'created_at',
             type: 'string',
-            format: 'date-time',
-            example: '2023-01-01T00:00:00Z'
+            example: '01/01/2023 00:00:00'
         )
     ]
 )]
@@ -320,6 +317,15 @@ use OpenApi\Attributes as OA;
             type: 'string',
             example: 'Operation completed successfully'
         )
+    ]
+)]
+#[OA\Schema(
+    schema: 'AuthenticatedUser',
+    type: 'object',
+    properties: [
+        new OA\Property(property: 'id', type: 'integer', example: 1),
+        new OA\Property(property: 'name', type: 'string', example: 'Igor Candido'),
+        new OA\Property(property: 'email', type: 'string', example: 'igor.candido@aiqfome.com')
     ]
 )]
 class Schemas
