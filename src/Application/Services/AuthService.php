@@ -45,8 +45,8 @@ class AuthService
         $jti = bin2hex(random_bytes(16));
 
         $payload = [
-            'iss' => $_ENV['API_BASE_URL'] ?? 'http://localhost:8080',
-            'aud' => $_ENV['API_BASE_URL'] ?? 'http://localhost:8080',
+            'iss' => $_ENV['API_BASE_URL'],
+            'aud' => $_ENV['API_BASE_URL'],
             'iat' => $issuedAt,
             'exp' => $expire,
             'jti' => $jti,
@@ -79,12 +79,12 @@ class AuthService
 
     public function refreshToken(string $token): ?string
     {
-        $userData = $this->validateJWT($token);
-        if (!$userData) {
-            return null;
+        $decoded = JWT::decode($token, new Key($this->jwtSecret, 'HS256'));
+        if (isset($decoded->jti) && !$this->sessionRepository->isSessionRevoked($decoded->jti)) {
+            $this->sessionRepository->revokeToken($decoded->jti);
         }
 
-        $client = $this->clientRepository->findById($userData['id']);
+        $client = $this->clientRepository->findById($decoded->user->id);
         if (!$client) {
             return null;
         }
@@ -94,15 +94,11 @@ class AuthService
 
     public function logout(string $token): bool
     {
-        try {
-            $decoded = JWT::decode($token, new Key($this->jwtSecret, 'HS256'));
-            if (isset($decoded->jti)) {
-                return $this->sessionRepository->revokeToken($decoded->jti);
-            }
-
-            return false;
-        } catch (\Exception $e) {
-            return false;
+        $decoded = JWT::decode($token, new Key($this->jwtSecret, 'HS256'));
+        if (isset($decoded->jti) && !$this->sessionRepository->isSessionRevoked($decoded->jti)) {
+            return $this->sessionRepository->revokeToken($decoded->jti);
         }
+
+        return false;
     }
 }
