@@ -19,6 +19,6 @@ interface ClientRepository
     public function delete(int $id): bool;
     
     public function emailExists(string $email, ?int $excludeId = null): bool;
-    
-    public function verifyPassword(string $email, string $password): ?Client;
+
+    public function verifyPassword(string $email, string $password): ?array;
 }

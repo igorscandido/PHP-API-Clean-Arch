@@ -7,6 +7,7 @@ use App\Application\Ports\SessionRepository;
 use App\Domain\Entities\Client;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use DateTime;
 
 class AuthService
 {
@@ -23,7 +24,18 @@ class AuthService
 
     public function authenticateUser(string $email, string $password): ?Client
     {
-        return $this->clientRepository->verifyPassword($email, $password);
+        $client = $this->clientRepository->verifyPassword($email, $password);
+        if ($client && password_verify($password, $client['password'])) {
+            return Client::withoutPassword(
+                id: $client['id'],
+                name: $client['name'],
+                email: $client['email'],
+                createdAt: new DateTime($client['created_at']),
+                updatedAt: new DateTime($client['updated_at'])
+            );
+        }
+
+        return null;
     }
 
     public function generateJWT(Client $client): string

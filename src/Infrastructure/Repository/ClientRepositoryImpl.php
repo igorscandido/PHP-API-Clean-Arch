@@ -121,14 +121,15 @@ class ClientRepositoryImpl implements ClientRepository
         return $stmt->fetchColumn() > 0;
     }
 
-    public function verifyPassword(string $email, string $password): ?Client
+    public function verifyPassword(string $email, string $password): ?array
     {
-        $client = $this->findByEmail($email);
-        if ($client && $client->verifyPassword($password)) {
-            return $client;
-        }
-        
-        return null;
+        $stmt = $this->db->prepare("
+            SELECT id, name, email, password, created_at, updated_at 
+            FROM clients 
+            WHERE email = ?
+        ");
+        $stmt->execute([$email]);
+        return $stmt->fetch();
     }
 
     private function mapToEntity(array $data): Client
