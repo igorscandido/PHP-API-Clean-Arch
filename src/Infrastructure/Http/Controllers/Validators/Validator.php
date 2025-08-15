@@ -33,15 +33,22 @@ abstract class Validator
         foreach ($rules as $field => $validator) {
             $value = $data[$field] ?? null;
 
+            if (method_exists($validator, 'setName')) {
+                $validator->setName($field);
+            }
+
             try {
                 $validator->assert($value);
             } catch (ValidationException $e) {
-                $errors[] = "{$field}: " . $e->getMessage();
+                $messages = method_exists($e, 'getMessages') ? $e->getMessages() : [$e->getMessage()];
+                foreach ($messages as $message) {
+                    $errors[] = $message;
+                }
             }
         }
 
         if (!empty($errors)) {
-            throw new \InvalidArgumentException('Validation failed: ' . implode(', ', $errors));
+            throw new \InvalidArgumentException('Bad request: ' . implode(', ', $errors));
         }
     }
 }
