@@ -129,7 +129,13 @@ class ClientRepositoryImpl implements ClientRepository
             WHERE email = ?
         ");
         $stmt->execute([$email]);
-        return $stmt->fetch();
+
+        $client = $stmt->fetch();
+        if (!$client) {
+            return null;
+        }
+
+        return $client;
     }
 
     private function mapToEntity(array $data): Client
