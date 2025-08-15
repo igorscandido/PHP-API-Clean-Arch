@@ -197,7 +197,7 @@ class FavoriteControllerTest extends BaseIntegrationTest
 
         $this->assertResponseStatus($result, 400);
         $this->assertResponseIsJson($result);
-        $this->assertResponseHasError($result, 'Validation failed: product_id');
+        $this->assertResponseHasError($result, 'product_id must be positive');
     }
 
     /**
@@ -459,6 +459,6 @@ class FavoriteControllerTest extends BaseIntegrationTest
 
         $this->assertResponseStatus($result, 400);
         $this->assertResponseIsJson($result);
-        $this->assertResponseHasError($result, 'Validation failed: product_id');
+        $this->assertResponseHasError($result, 'product_id must be positive');
     }
 }

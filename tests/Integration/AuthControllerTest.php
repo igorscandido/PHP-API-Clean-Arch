@@ -121,7 +121,7 @@ class AuthControllerTest extends BaseIntegrationTest
 
         $this->assertResponseStatus($result, 400);
         $this->assertResponseIsJson($result);
-        $this->assertResponseHasError($result, 'Validation failed: email');
+        $this->assertResponseHasError($result, 'email must be valid email');
     }
 
     /**
@@ -141,7 +141,7 @@ class AuthControllerTest extends BaseIntegrationTest
 
         $this->assertResponseStatus($result, 400);
         $this->assertResponseIsJson($result);
-        $this->assertResponseHasError($result, 'Validation failed: password');
+        $this->assertResponseHasError($result, 'password must have a length greater than or equal to 6');
     }
 
     /**

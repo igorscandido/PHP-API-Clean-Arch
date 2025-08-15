@@ -186,7 +186,7 @@ A aplicação possui testes de integração implementados com PHPUnit para os en
 composer run test
 
 # Via Docker
-docker-compose exec app composer run test
+docker-compose exec app vendor/bin/phpunit
 ```
 
 ### Cobertura
