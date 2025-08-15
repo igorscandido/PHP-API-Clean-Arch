@@ -172,7 +172,7 @@ class ClientController
                 ->withHeader('Content-Type', 'application/json')
                 ->withStatus(201);
         } catch (\InvalidArgumentException $e) {
-            return $this->errorResponse($response, $e->getMessage(), 409);
+            return $this->errorResponse($response, $e->getMessage(), 400);
         } catch (\Exception $e) {
             return $this->errorResponse($response, 'Failed to create client', 500);
         }
@@ -312,7 +312,7 @@ class ClientController
             $id = (int) $args['id'];
 
             if ($request->getAttribute('auth_data')['id'] !== $id) {
-                return $this->errorResponse($response, 'You are not authorized to update this client', 403);
+                return $this->errorResponse($response, 'You are not authorized to delete this client', 403);
             }
 
             $client = $this->clientService->getClientById($id);
