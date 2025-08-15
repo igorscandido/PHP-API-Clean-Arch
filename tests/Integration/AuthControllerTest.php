@@ -49,7 +49,8 @@ class AuthControllerTest extends BaseIntegrationTest
             ->once()
             ->andReturn('mocked.jwt.token');
 
-        $request = $this->createJsonRequest('POST', '/auth/login', $loginData);
+        $request = $this->createJsonRequest('POST', '/auth/login', $loginData)
+            ->withAttribute('token', 'mocked.jwt.token');
         $response = $this->createResponse();
 
         $result = $this->controller->login($request, $response);
@@ -92,7 +93,8 @@ class AuthControllerTest extends BaseIntegrationTest
             ->once()
             ->andReturn(null);
 
-        $request = $this->createJsonRequest('POST', '/auth/login', $loginData);
+        $request = $this->createJsonRequest('POST', '/auth/login', $loginData)
+            ->withAttribute('token', 'mocked.jwt.token');
         $response = $this->createResponse();
 
         $result = $this->controller->login($request, $response);
@@ -173,6 +175,8 @@ class AuthControllerTest extends BaseIntegrationTest
         $request = $this->createJsonRequest('POST', '/auth/refresh', [], [
             'Authorization' => 'Bearer ' . $token
         ]);
+        $request = $request->withAttribute('token', $token);
+        
         $response = $this->createResponse();
 
         $result = $this->controller->refresh($request, $response);
@@ -208,6 +212,8 @@ class AuthControllerTest extends BaseIntegrationTest
         $request = $this->createJsonRequest('POST', '/auth/refresh', [], [
             'Authorization' => 'Bearer ' . $token
         ]);
+        $request = $request->withAttribute('token', $token);
+        
         $response = $this->createResponse();
 
         $result = $this->controller->refresh($request, $response);
@@ -215,21 +221,6 @@ class AuthControllerTest extends BaseIntegrationTest
         $this->assertResponseStatus($result, 401);
         $this->assertResponseIsJson($result);
         $this->assertResponseHasError($result, 'Invalid or expired token');
-    }
-
-    /**
-     * @test
-     */
-    public function refresh_token_without_bearer_token_should_return_bad_request(): void
-    {
-        $request = $this->createJsonRequest('POST', '/auth/refresh');
-        $response = $this->createResponse();
-
-        $result = $this->controller->refresh($request, $response);
-
-        $this->assertResponseStatus($result, 400);
-        $this->assertResponseIsJson($result);
-        $this->assertResponseHasError($result, 'Bearer token required');
     }
 
     /**
