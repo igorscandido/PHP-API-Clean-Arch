@@ -2,7 +2,7 @@
 
 namespace App\Application\Dtos;
 
-class ClientDto
+class ClientDto implements \JsonSerializable
 {
     public function __construct(
         public ?int $id,
@@ -34,5 +34,10 @@ class ClientDto
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt
         ];
+    }
+
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }
