@@ -28,6 +28,9 @@ class ProductRepositoryImpl implements ProductRepository
             
             if ($response->getStatusCode() === 200) {
                 $productData = json_decode($response->getBody()->getContents(), true);
+                if (!$productData) {
+                    return null;
+                }
                 
                 return [
                     'id' => $productData['id'],
