@@ -27,12 +27,12 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'created_at',
             type: 'string',
-            example: '01/01/2023 00:00:00'
+            example: '14/08/2025 00:00:00'
         ),
         new OA\Property(
             property: 'updated_at',
             type: 'string',
-            example: '01/01/2023 00:00:00'
+            example: '14/08/2025 00:00:00'
         )
     ]
 )]
@@ -281,7 +281,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(
             property: 'created_at',
             type: 'string',
-            example: '01/01/2023 00:00:00'
+            example: '14/08/2025 00:00:00'
         )
     ]
 )]
