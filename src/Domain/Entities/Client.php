@@ -21,10 +21,6 @@ class Client
         ?DateTime $createdAt = null,
         ?DateTime $updatedAt = null
     ) {
-        $this->validateName($name);
-        $this->validateEmail($email);
-        $this->validatePassword($password);
-
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
@@ -91,61 +87,20 @@ class Client
 
     public function updateName(string $name): void
     {
-        $this->validateName($name);
         $this->name = $name;
         $this->updatedAt = new DateTime();
     }
 
     public function updateEmail(string $email): void
     {
-        $this->validateEmail($email);
         $this->email = $email;
         $this->updatedAt = new DateTime();
     }
 
     public function updatePassword(string $password): void
     {
-        $this->validatePassword($password);
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->updatedAt = new DateTime();
-    }
-
-    public function verifyPassword(string $password): bool
-    {
-        if (!$this->password) {
-            return false;
-        }
-
-        return password_verify($password, $this->password);
-    }
-
-    private function validateName(string $name): void
-    {
-        if (empty(trim($name))) {
-            throw new \InvalidArgumentException('Name cannot be empty');
-        }
-
-        if (strlen($name) > 255) {
-            throw new \InvalidArgumentException('Name cannot exceed 255 characters');
-        }
-    }
-
-    private function validateEmail(string $email): void
-    {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException('Invalid email format');
-        }
-
-        if (strlen($email) > 255) {
-            throw new \InvalidArgumentException('Email cannot exceed 255 characters');
-        }
-    }
-
-    private function validatePassword(string $password): void
-    {
-        if (strlen($password) < 6) {
-            throw new \InvalidArgumentException('Password must be at least 6 characters long');
-        }
     }
 
     public function toArray(): array
