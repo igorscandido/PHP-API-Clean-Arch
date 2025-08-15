@@ -15,11 +15,7 @@ class ProductService
 
     public function getAllProducts(): array
     {
-        try {
-            return $this->productRepository->getAllProducts();
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to fetch products: ' . $e->getMessage());
-        }
+        return $this->productRepository->getAllProducts();
     }
 
     public function getProduct(int $productId): ?array
@@ -28,11 +24,7 @@ class ProductService
             return null;
         }
 
-        try {
-            return $this->productRepository->getProduct($productId);
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to fetch product: ' . $e->getMessage());
-        }
+        return $this->productRepository->getProduct($productId);
     }
 
     public function productExists(int $productId): bool
@@ -41,10 +33,6 @@ class ProductService
             return false;
         }
 
-        try {
-            return $this->productRepository->getProduct($productId) !== null;
-        } catch (\Exception $e) {
-            throw new \Exception('Failed to validate product: ' . $e->getMessage());
-        }
+        return $this->productRepository->getProduct($productId) !== null;
     }
 }
