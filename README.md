@@ -1,4 +1,4 @@
-# Aiqfome Challenge API
+# PHP API Clean Arch
 
 API RESTful para gerenciamento de produtos favoritos dos clientes.
 
