@@ -1,6 +1,6 @@
 # Aiqfome Challenge API
 
-API RESTful para gerenciamento de produtos favoritos dos clientes, desenvolvida como parte do desafio técnico para desenvolvedor backend na Aiqfome.
+API RESTful para gerenciamento de produtos favoritos dos clientes.
 
 ## Visão Geral
 
